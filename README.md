@@ -1,12 +1,10 @@
-# WT-TBiLSTM Reproducible Experimental Project
+# WT-TBiLSTM Experimental Project
 
 本工程用于复现修改后论文手稿中的主要实验流程：
 
 - 两个主数据集：`UK_Ac`、`EU_Co`
 - 七个预测模型：`GRU`、`LSTM`、`WT-LSTM`、`BiLSTM`、`CNN-LSTM`、`WT-BiLSTM`、`WT-TBiLSTM`
 - 结果输出：整体指标、消融实验、完整测试集预测、复杂度分析、重复实验统计检验、论文图表数据
-
-> 说明：本工程是对原始零散实验脚本的规范化重构。`archive/original_code_reference/` 中保留了原始脚本作为参考，主实验以 `src/` 目录代码为准。
 
 ---
 
