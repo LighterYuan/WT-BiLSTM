@@ -1,0 +1,94 @@
+project:
+  name: WT-TBiLSTM_Reproducible_Project
+  random_seed: 42
+
+paths:
+  raw_data_dir: data/raw
+  processed_dir: data/processed
+  wavelet_dir: data/wavelet
+  metrics_dir: results/metrics
+  predictions_dir: results/predictions
+  figures_dir: results/figures
+  tables_dir: results/tables
+  model_dir: models
+  log_dir: logs
+
+datasets:
+  UK_Ac:
+    file: UK_Ac.csv
+    time_col: Time
+    target_col: traffic
+    train_ratio: 0.80
+  EU_Co:
+    file: EU_Co.csv
+    time_col: Time
+    target_col: traffic
+    train_ratio: 0.80
+
+preprocessing:
+  time_steps: 10
+  scaler: minmax
+  leakage_safe: true
+
+wavelet:
+  enabled_models:
+    - WT-LSTM
+    - WT-BiLSTM
+    - WT-TBiLSTM
+  wavelet: db8
+  level: 3
+  threshold_mode: soft
+  threshold_strategy: universal
+
+model:
+  units: 64
+  dense_units: 32
+  dropout: 0.20
+  conv_filters: 32
+  conv_kernel_size: 3
+  attention_units: 32
+
+training:
+  epochs: 80
+  batch_size: 64
+  validation_split: 0.10
+  learning_rate: 0.001
+  patience: 12
+  reduce_lr_patience: 6
+  min_delta: 0.000001
+  save_model: true
+
+quick:
+  max_rows: 1800
+  epochs: 3
+  batch_size: 32
+  models:
+    - LSTM
+    - WT-TBiLSTM
+
+experiments:
+  models:
+    - GRU
+    - LSTM
+    - WT-LSTM
+    - BiLSTM
+    - CNN-LSTM
+    - WT-BiLSTM
+    - WT-TBiLSTM
+  default_seeds:
+    - 1
+    - 2
+    - 3
+    - 4
+    - 5
+
+robustness:
+  segment_size: 500
+
+statistics:
+  alpha: 0.05
+  reference_model: WT-TBiLSTM
+  tests:
+    - WT-BiLSTM
+    - CNN-LSTM
+    - LSTM
